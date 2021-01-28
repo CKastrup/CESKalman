@@ -1,0 +1,24 @@
+Package: CESKalman
+Title: CESKalman
+Version: 1.0
+Authors@R: 
+    person(given = "Christian Sandholm",
+           family = "Kastrup",
+           role = c("cre"),
+           email = "CST@dreamgruppen.dk",
+           comment = c(ORCID = "YOUR-ORCID-ID"))
+    person(given = "Anders Farver",
+           family = "Kronborg",
+           role = c("cre"),
+           email = "ANK@dreamgruppen.dk",
+           comment = c(ORCID = "YOUR-ORCID-ID"))
+    person(given = "Peter Philip",
+           family = "Stephensen",
+           role = c("cre"),
+           email = "PSP@dreamgruppen.dk",
+           comment = c(ORCID = "YOUR-ORCID-ID"))
+Description: This package can be used to estimate the elasticity of substitution in a CES function with two inputs. The package uses the Kalman filter to account for unobserved structural changes, such as technical change. The main function is CESKalman.
+License: What license it uses
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.1.1
