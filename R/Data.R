@@ -73,7 +73,7 @@
 
 Load_Data = function(Country,tstart=1970,tend=2017){
 
-  load("C:/Users/kastr/OneDrive/Arbejde/CESKalman/New/Data/Data.RData")
+  load("Data.RData")
 
   tmp = get(paste(Country))
 
