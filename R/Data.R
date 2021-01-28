@@ -73,7 +73,7 @@
 
 Load_Data = function(Country,tstart=1970,tend=2017){
 
-  load("data/Data.RData")
+  "Data"
 
   tmp = get(paste(Country))
 
