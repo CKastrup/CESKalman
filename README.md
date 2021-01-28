@@ -1,10 +1,13 @@
 ---
-title: "Estimating the Constant Elasticity of Substitution Subject to Time-varying, Nonlinear, Technical Change: The CESKalman R-package"
+title: "'Estimating the Constant Elasticity of Substitution Subject to Time-varying,"
+  Nonlinear, Technical Change: The CESKalman R-package'
 author: "Christian S. Kastrup, Anders F. Kronborg and Peter P. Stephensen"
-date: \today{}
-output: pdf_document
-bibliography: Library_Seminar.bib
+date: "\today{}"
+output:
+  html_document:
+    df_print: paged
 linestretch: 1.5
+bibliography: Library_Seminar.bib
 ---
 
 ```{r setup, include=FALSE}
@@ -56,7 +59,7 @@ The first step in our analysis is the installation of the package. The package i
 ```{r,results='hide',warning=FALSE,message=FALSE}
 ## Installing the package
 library(devtools)
-devtools::install("C:/Users/kastr/OneDrive/Arbejde/kalman_package/CESKalman")
+install_github("CKastrup/CESKalman")
 library(CESKalman)
 
 ```
