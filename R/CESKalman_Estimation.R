@@ -140,7 +140,7 @@ if(!between(alpha_init,-1,0)){
 
           param[2]=c(c(set.param_init[n]-log(100)),c(set.param_init[n]-log(10)),c(set.param_init[n]-log(1000)),c(set.param_init[n]-log(500)),c(set.param_init[n]-log(50)))[i]
 
-          MLE       <- dlmMLE(Y=Y, param, build_SS,X=X,nlags=nlags,lambda=lambda,Leontief=Leontief,alpha_init=alpha_init,sigma_init=sigma_init, method = "L-BFGS-B", debug = FALSE,hessian=TRUE)
+          MLE       <- dlmMLE(Y, param, build_SS,X=X,nlags=nlags,lambda=lambda,Leontief=Leontief,alpha_init=alpha_init,sigma_init=sigma_init, method = "L-BFGS-B", debug = FALSE,hessian=TRUE)
           MLE.build <- build_SS(MLE$par,X=X,nlags=nlags,lambda=lambda,Leontief=Leontief,alpha_init=alpha_init,sigma_init=sigma_init)
           MLE.param     <- MLE$par
 
