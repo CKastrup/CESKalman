@@ -56,7 +56,7 @@
 #'
 #'
 #' @return
-#' Returns a list of class CESKalman from the preferred call of function CESKalman_Estimation (highest likelihood and well specified). See CESKalman_Estimation for description.
+#' Returns a list of class CESKalman from the preferred call of function CESKalman_Estimation (highest likelihood and well specified). See CESKalman_Estimation for description. In addition, the data series applied is returned.
 #'
 #' @examples
 #'
@@ -161,7 +161,7 @@ if(is.na(grid.lambda[1])&lambda_est_freely==FALSE){
 
   S = log((data[,1]*data[,3])/(data[,2]*data[,4]))
   P = log(data[,1]/data[,2])
-
+  
 ## Start looping and choosing the optimal one
 
 
@@ -288,6 +288,8 @@ if(lambda_est_freely){
 
 } ## Stops looping over lambda
 
+  tmp_pref$data = data
+  
   return(tmp_pref) ## Return the preferred one.
 
 }
