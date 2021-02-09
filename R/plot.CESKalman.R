@@ -67,7 +67,7 @@ plot.CESKalman <- function(Kalman,t0=1,tEnd=nrow(Kalman$data),main=""){
   x_0 = log((data[,3])/(data[,4]))[1]
   alpha_hat = Kalman$alpha
   p = log(data[,1]/data[,2])
-  if(Kalman$sigma==0){phi_hat = c(NA,(Kalman$Smooth$s[1,5])*diff(p))}else{phi_hat = c(NA,(Kalman$Smooth$s[1,6])*diff(p))} ## We loose the first observation due to the difference
+  if(Kalman$sigma==0){phi_hat = c(NA,(Kalman$Smooth$s[1,5]-1)*diff(p))}else{phi_hat = c(NA,(Kalman$Smooth$s[1,6]-1)*diff(p))} ## We loose the first observation due to the difference
   beta_hat = -Kalman$sigma
   mu_hat = c((Kalman$sigma-1)*Kalman$Gamma,NA)  ## Note that since Gamma is lagged in the ECM, no observation is available at time T
   ## Fitted values
@@ -86,7 +86,7 @@ plot.CESKalman <- function(Kalman,t0=1,tEnd=nrow(Kalman$data),main=""){
     x_hat_price[t] = sum((-alpha_hat*beta_hat*p[(t-1):1]+phi_hat[t:2])*(1+alpha_hat)^(0:(t-2)) )
   }
   cor=round(cor(x_hat_trend[-1],x_hat_price[-1]),2)
-  x_hat = x_hat_trend+x_hat_price
+ # x_hat = x_hat_trend+x_hat_price
 
   x_hat   = ts(x_hat[-1],start=t0+1+nlags,end=tEnd,frequency = 1)
   x_hat_trend = ts(x_hat_trend[-1],start=t0+1+nlags,end=tEnd,frequency = 1)
@@ -119,14 +119,14 @@ plot.CESKalman <- function(Kalman,t0=1,tEnd=nrow(Kalman$data),main=""){
 #   abline(h=0,col="grey40")
 #
 #   legend("topleft",c("Prices+cycle","Prices","Cycle rhs."),lty=c(1,2,1),cex=1,lwd=c(2,2,1))
-  dat = cbind(x,x_hat)
+  dat = cbind(x,x-Kalman$residuals)
 
     plot(x,lty=1,type="l",ylim=c(min(dat),max(dat,na.rm = T)),ylab="",xlab="",main="Model fit of relative quantities",lwd=2)
-  lines(x_hat,lty=1,lwd=2,col="red")
+  lines(x-Kalman$residuals,lty=1,lwd=2,col="red")
 
 
   par(new = TRUE)
-  plot(x-x_hat,type="h",axes=F,ylab="",xlab="",lty=1)
+  plot(x-Kalman$residuals,type="h",axes=F,ylab="",xlab="",lty=1)
   axis(4)
   abline(h=0,col="grey40")
 

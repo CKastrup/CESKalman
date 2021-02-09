@@ -4,7 +4,7 @@
 \alias{CESKalman_Estimation}
 \title{Function for estimating a CES production function with the Kalman filter.}
 \usage{
-CESKalman_Estimation(Y,data,grid.param_init=c(-9,-1,1),nlags,lambda,
+CESKalman_Estimation(Y,X,grid.param_init=c(-9,-1,5),nlags,lambda,
 
 Leontief=FALSE,alpha_init,sigma_init,cVal_NIS=0.10)
 }
@@ -41,7 +41,6 @@ Returns a list with the following objects:
 \strong{BP_test:} p-value from the Breusch Pagan test for heteroscedasticity from function bptest.
 \strong{JB_test:} p-value from the Jarque Bera test for normality from function jbtest.
 \strong{NIS_test:} Value, lower and upper confidence bands of the Normalized Innovations Squared test.
-\strong{data:} The data applied in estimation.
 }
 \description{
 This function first estimates the variances with the dlmMLE function from dlm package. Second, the

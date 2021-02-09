@@ -44,7 +44,7 @@
 #' @param alpha_init Initial value for the adjustment parameter, \eqn{\alpha}
 #' @param cVal_NIS Critical value used to construct the confidence bands of the NIS test. Default is 0.10
 #'
-#' @usage CESKalman_Estimation(Y,data,grid.param_init=c(-9,-1,1),nlags,lambda,
+#' @usage CESKalman_Estimation(Y,X,grid.param_init=c(-9,-1,5),nlags,lambda,
 #' @usage          Leontief=FALSE,alpha_init,sigma_init,cVal_NIS=0.10)
 #'
 #' @return
@@ -96,8 +96,6 @@ if(!between(alpha_init,-1,0)){
 #
 #   S = log((data[,1]*data[,3])/(data[,2]*data[,4]))
 #   P = log(data[,1]/data[,2])
-# 
-#   Y=S
 #   
 # if(Leontief==FALSE){
 #     X <- cbind(S[(1+nlags):(length(S)-1)],P[(1+nlags):(length(S)-1)],diff(P[(1+nlags):length(P)]))
