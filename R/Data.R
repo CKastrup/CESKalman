@@ -79,6 +79,6 @@ Load_Data = function(Country,tstart=1970,tend=2017){
 
   tmp = window(tmp,start=tstart,end=tend)
 
-    return(data.frame(tmp))
+    return(tmp)
 
 }
