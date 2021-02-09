@@ -126,7 +126,7 @@ plot.CESKalman <- function(Kalman,t0=1,tEnd=nrow(Kalman$data),main=""){
 
 
   par(new = TRUE)
-  plot(x-Kalman$residuals,type="h",axes=F,ylab="",xlab="",lty=1)
+  plot(Kalman$residuals,type="h",axes=F,ylab="",xlab="",lty=1)
   axis(4)
   abline(h=0,col="grey40")
 
