@@ -61,7 +61,6 @@
 #' \strong{BP_test:} p-value from the Breusch Pagan test for heteroscedasticity from function bptest.
 #' \strong{JB_test:} p-value from the Jarque Bera test for normality from function jbtest.
 #' \strong{NIS_test:} Value, lower and upper confidence bands of the Normalized Innovations Squared test.
-#' \strong{data:} The data applied in estimation.
 #'
 #' @seealso
 #' See dlm package for a decription of dlm objects, in particular the dlmSmooth function. See Kronborg et al (2019) for a description of the methodology.
@@ -73,7 +72,7 @@
 # Starting function
 # ===================================================================
 
-CESKalman_Estimation <- function(Y,X,grid.param_init=c(-9,-1,3),nlags,lambda,Leontief=FALSE,alpha_init=-0.3,sigma_init=0.5,
+CESKalman_Estimation <- function(Y,X,grid.param_init=c(-9,-1,5),nlags,lambda,Leontief=FALSE,alpha_init=-0.3,sigma_init=0.5,
                                  cVal_NIS=0.10){
 
   library("dlm")
@@ -97,17 +96,19 @@ if(!between(alpha_init,-1,0)){
 #
 #   S = log((data[,1]*data[,3])/(data[,2]*data[,4]))
 #   P = log(data[,1]/data[,2])
-#
+# 
+#   Y=S
+#   
 # if(Leontief==FALSE){
 #     X <- cbind(S[(1+nlags):(length(S)-1)],P[(1+nlags):(length(S)-1)],diff(P[(1+nlags):length(P)]))
 #     }else{
 #       X <- cbind(S[(1+nlags):(length(S)-1)]-P[(1+nlags):(length(S)-1)],diff(P[(1+nlags):length(P)]))
 #     }
-#
+# 
 #   if(nlags==1){
 #     X <- cbind(X,diff(P[1:(length(P)-1)]),diff(S[1:(length(S)-1)]))
 #   }
-#
+# 
 #   if(nlags==2){
 #     X <- cbind(X,diff(P[nlags:(length(P)-1)]),diff(S[nlags:(length(S)-1)]),
 #                diff(P[1:(length(P)-nlags)]),diff(S[1:(length(S)-nlags)]))
@@ -141,7 +142,7 @@ if(!between(alpha_init,-1,0)){
 
           param[2]=c(c(set.param_init[n]-log(100)),c(set.param_init[n]-log(10)),c(set.param_init[n]-log(1000)),c(set.param_init[n]-log(500)),c(set.param_init[n]-log(50)))[i]
 
-          MLE       <- dlmMLE(Y, param, build_SS,X=X,nlags=nlags,lambda=lambda,Leontief=Leontief,alpha_init=alpha_init,sigma_init=sigma_init, method = "L-BFGS-B", debug = FALSE,hessian=TRUE)
+          MLE       <- dlmMLE(Y=Y, param, build_SS,X=X,nlags=nlags,lambda=lambda,Leontief=Leontief,alpha_init=alpha_init,sigma_init=sigma_init, method = "L-BFGS-B", debug = FALSE,hessian=TRUE)
           MLE.build <- build_SS(MLE$par,X=X,nlags=nlags,lambda=lambda,Leontief=Leontief,alpha_init=alpha_init,sigma_init=sigma_init)
           MLE.param     <- MLE$par
 
@@ -252,8 +253,8 @@ if(!between(alpha_init,-1,0)){
 
   Gamma = (1/(LR_Elasticity-1))*Smooth_Struc
 
-  output = list(Smooth,Gamma,res,LR_Elasticity,Adjust,LV,return_lambda,BG_test,JB_test,BP_test,NIS_test,data)
-  names(output)=c("Smooth","Gamma","residuals","sigma","alpha","LV","est.lambda","BG_test","JB_test","BP_test","NIS_test","data")
+  output = list(Smooth,Gamma,res,LR_Elasticity,Adjust,LV,return_lambda,BG_test,JB_test,BP_test,NIS_test)
+  names(output)=c("Smooth","Gamma","residuals","sigma","alpha","LV","est.lambda","BG_test","JB_test","BP_test","NIS_test")
 
   class(output) = c("list","CESKalman")
 
