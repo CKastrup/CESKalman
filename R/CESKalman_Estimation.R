@@ -96,8 +96,6 @@ if(!between(alpha_init,-1,0)){
 #
 #   S = log((data[,1]*data[,3])/(data[,2]*data[,4]))
 #   P = log(data[,1]/data[,2])
-# 
-#   Y=S
 #   
 # if(Leontief==FALSE){
 #     X <- cbind(S[(1+nlags):(length(S)-1)],P[(1+nlags):(length(S)-1)],diff(P[(1+nlags):length(P)]))

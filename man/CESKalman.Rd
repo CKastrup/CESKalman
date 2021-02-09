@@ -30,7 +30,7 @@ CESKalman(data,grid.param_init=c(-9,-1,5),max_nlags=2,grid.lambda,
 \item{lambda_est_freely}{Should lambda also be estimated freely?}
 }
 \value{
-Returns a list of class CESKalman from the preferred call of function CESKalman_Estimation (highest likelihood and well specified). See CESKalman_Estimation for description.
+Returns a list of class CESKalman from the preferred call of function CESKalman_Estimation (highest likelihood and well specified). See CESKalman_Estimation for description. In addition, the data series applied is returned.
 }
 \description{
 The function applies the CESKalman_Estimation function to estimate the elasticity of substitution in a
