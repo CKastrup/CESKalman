@@ -67,7 +67,7 @@ plot.CESKalman <- function(Kalman,t0=1,tEnd=nrow(Kalman$data),main=""){
   x_0 = log((data[,3])/(data[,4]))[1]
   alpha_hat = Kalman$alpha
   p = log(data[,1]/data[,2])
-  if(Kalman$sigma==0){phi_hat = c(NA,(Kalman$Smooth$s[1,5]-1)*diff(p))}else{phi_hat = c(NA,(Kalman$Smooth$s[1,6]-1)*diff(p))} ## We loose the first observation due to the difference
+  if(Kalman$sigma==0){phi_hat = c(NA,(Kalman$Smooth$s[1,5])*diff(p))}else{phi_hat = c(NA,(Kalman$Smooth$s[1,6])*diff(p))} ## We loose the first observation due to the difference
   beta_hat = -Kalman$sigma
   mu_hat = c((Kalman$sigma-1)*Kalman$Gamma,NA)  ## Note that since Gamma is lagged in the ECM, no observation is available at time T
   ## Fitted values
