@@ -88,12 +88,19 @@ plot.CESKalman <- function(Kalman,t0=1,tEnd=nrow(Kalman$data),main=""){
   cor=round(cor(x_hat_trend[-1],x_hat_price[-1]),2)
  # x_hat = x_hat_trend+x_hat_price
 
+  
+  ## Long run residuals
+  LR_res = x-beta_hat*p-mu_hat
+  
   x_hat   = ts(x_hat[-1],start=t0+1+nlags,end=tEnd,frequency = 1)
   x_hat_trend = ts(x_hat_trend[-1],start=t0+1+nlags,end=tEnd,frequency = 1)
   x_hat_price = ts(x_hat_price[-1],start=t0+1+nlags,end=tEnd,frequency = 1)
   x      = ts(x[-1],start=t0+1+nlags,end=tEnd,frequency = 1)
   p      = ts(p[-1],start=t0+1+nlags,end=tEnd,frequency=1)
 
+  
+
+  
 #
 #   Constant = mean(s-s_hat_price-s_hat_trend,na.rm = T)
 #   plot(s-s_hat_price,lty=1,type="l",ylim=c(min(s-s_hat_price,s_hat_trend+Constant,na.rm = T),max(s-s_hat_price,s_hat_trend+Constant,na.rm = T)),ylab="",xlab="",main="Trend and cycle",lwd=2)
@@ -130,16 +137,24 @@ plot.CESKalman <- function(Kalman,t0=1,tEnd=nrow(Kalman$data),main=""){
   axis(4)
   abline(h=0,col="grey40")
 
-  legend("topleft",c("Relative quantities","Fit","Residuals rhs."),lty=c(1,1,1),,col=c("black","red","black"),cex=1,lwd=c(2,2,1))
+  legend("topleft",c("Relative quantities","Fit","Residuals rhs."),lty=c(1,1,1),col=c("black","red","black"),cex=1,lwd=c(2,2,1))
 
-dat = cbind(x_hat,x_hat_trend,x_hat_price)
-
-    plot(x_hat,lty=1,type="l",ylim=c(min(dat,na.rm = T),max(dat,na.rm = T)),ylab="",xlab="",main="Decomposition of fitted relative quantities",lwd=2)
-    lines(x_hat_trend,lty=1,lwd=2,col="red")
-    lines(x_hat_price,lty=1,lwd=2,col="blue")
-
-    legend("topleft",c("Fit","Trend","Price-effects"),lty=c(1,1,1),col=c("black","red","blue"),cex=1,lwd=c(2,2,2))
-
+  
+  plot(ts(Kalman$Gamma,start=t0+nlags,end=tEnd-1),main="Relative augmenting technical change",lwd=2)
+  
+  legend("topleft",legend=expression(Gamma),lty=1,lwd=2)
+  
+  
+  
+#   
+# dat = cbind(x_hat,x_hat_trend,x_hat_price)
+# 
+#     plot(x_hat,lty=1,type="l",ylim=c(min(dat,na.rm = T),max(dat,na.rm = T)),ylab="",xlab="",main="Decomposition of fitted relative quantities",lwd=2)
+#     lines(x_hat_trend,lty=1,lwd=2,col="red")
+#     lines(x_hat_price,lty=1,lwd=2,col="blue")
+# 
+#     legend("topleft",c("Fit","Trend","Price-effects"),lty=c(1,1,1),col=c("black","red","blue"),cex=1,lwd=c(2,2,2))
+# 
     dat = cbind(x-mean(x),p-mean(p))
 
     plot(x-mean(x),lty=1,type="l",ylab="",xlab="",main="Demeaned data",lwd=2,ylim=c(min(dat,na.rm = T),max(dat,na.rm = T)))
