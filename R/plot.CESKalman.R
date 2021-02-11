@@ -58,7 +58,7 @@
 plot.CESKalman <- function(Kalman,t0=1,tEnd=nrow(Kalman$data),main=""){
   par(mar=c(2,2,2,2))
 #  par(mar=c(4,4,4,4))
-  par(mfrow=c(2,2),oma = c(3, 0, 3, 0))
+  par(mfrow=c(3,1),oma = c(3, 0, 3, 0))
 
   nlags = Kalman$nlags  ## Correct for lags
   data = Kalman$data[(1+nlags):nrow(Kalman$data),]
@@ -88,10 +88,6 @@ plot.CESKalman <- function(Kalman,t0=1,tEnd=nrow(Kalman$data),main=""){
   cor=round(cor(x_hat_trend[-1],x_hat_price[-1]),2)
  # x_hat = x_hat_trend+x_hat_price
 
-  
-  ## Long run residuals
-  LR_res = x-beta_hat*p-mu_hat
-  
   x_hat   = ts(x_hat[-1],start=t0+1+nlags,end=tEnd,frequency = 1)
   x_hat_trend = ts(x_hat_trend[-1],start=t0+1+nlags,end=tEnd,frequency = 1)
   x_hat_price = ts(x_hat_price[-1],start=t0+1+nlags,end=tEnd,frequency = 1)
@@ -143,9 +139,6 @@ plot.CESKalman <- function(Kalman,t0=1,tEnd=nrow(Kalman$data),main=""){
   plot(ts(Kalman$Gamma,start=t0+nlags,end=tEnd-1),main="Relative augmenting technical change",lwd=2)
   
   legend("topleft",legend=expression(Gamma),lty=1,lwd=2)
-  
-  plot(ts(LR_res,start=t0+nlags,end=tEnd),main="Long run residuals",lwd=2)
-  abline(h=0)
   
 #   
 # dat = cbind(x_hat,x_hat_trend,x_hat_price)
