@@ -138,8 +138,6 @@ plot.CESKalman <- function(Kalman,t0=1,tEnd=nrow(Kalman$data),main=""){
   
   plot(ts(Kalman$Gamma,start=t0+nlags,end=tEnd-1),main="Relative augmenting technical change",lwd=2)
   
-  legend("topleft",legend=expression(Gamma),lty=1,lwd=2)
-  
 #   
 # dat = cbind(x_hat,x_hat_trend,x_hat_price)
 # 
