@@ -168,7 +168,7 @@ if(print_results){
     if(k %% 10 == 0){
       cat("\014")
       cat(paste("This is draw number ",k,sep=""), "\n")
-  #    cat(paste("Acceptance ratio ",round(nacc_ratio,digits=2)), "\n")
+      cat(paste("Acceptance ratio ",round(nacc_ratio,digits=2)), "\n")
     }
 }
   }
