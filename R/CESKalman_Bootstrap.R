@@ -107,7 +107,7 @@ CESKalman_Bootstrap <- function(Estimation,grid.param_init=c(-9,-1,5),ndraw=1000
 
   DP = c(0,diff(P))
 
-  nacc <- 0
+  nacc <- 1
   k    <- 1
   while(k <= ndraw){
 
