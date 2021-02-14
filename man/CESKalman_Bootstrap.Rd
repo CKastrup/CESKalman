@@ -4,7 +4,7 @@
 \alias{CESKalman_Bootstrap}
 \title{Function for bootstrapping confidence intervals of the elasticity and adjustment parameter}
 \usage{
-CESKalman_Bootstrap(Estimation,grid.param_init=c(-9,-1,3),ndraw=1000,print_results=TRUE)
+CESKalman_Bootstrap(Estimation,grid.param_init=c(-9,-1,3),ndraw=1000,print_results=TRUE,cVal_Auto=0.1,cVal_NIS=0.1)
 }
 \arguments{
 \item{Estimation}{An object of class CESKalman}
@@ -13,7 +13,11 @@ CESKalman_Bootstrap(Estimation,grid.param_init=c(-9,-1,3),ndraw=1000,print_resul
 
 \item{ndraw}{The number of draws in the bootstrapping procedure, 1000 is default.}
 
+\item{cVal_NIS}{Critical value for the NIS test}
+
 \item{print_results}{Should results be printed while bootstrapping?}
+
+\item{cVal_auto}{Critical value for the Breusch-Godfrey test for autocorrelation}
 }
 \value{
 Returns a matrix of dimension ndrawX3. First column is the draws of sigma, second is the draws of alpha and third is the likelihood value.
@@ -30,6 +34,8 @@ by the CESKalman function.
 
 grid.param_init can be a vector of any length. Values to loop over for the variance of error term in observation equation, \eqn{\epsilon_t}, in the numerical optimization. When lambda is FALSE, differen values
 for the signal-to-noise ratio in the range from 10-1000 found to be optimal in Kronborg et al (2019) are tried. The one that maximizes the likelihood is chosen.
+
+Only draws with no autocorrelation in the estimated model and the NIS test within the limits specified in cVal_NIS is accepted.
 }
 \examples{
 
