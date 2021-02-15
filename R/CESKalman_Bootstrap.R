@@ -161,9 +161,12 @@ if(tmp$BG_test>cVal_Auto&tmp$NIS_test[1]>tmp$NIS_test[2]&tmp$NIS_test[1]<tmp$NIS
       boot_likelihood[k] = tmp$LV
       k <- k + 1
 
-    nacc = nacc+1
+
 }
+    
+    nacc = nacc+1
     nacc_ratio= k/nacc
+
 if(print_results){
     if(k %% 10 == 0){
       cat("\014")
