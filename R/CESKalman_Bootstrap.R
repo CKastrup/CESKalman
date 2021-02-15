@@ -94,7 +94,7 @@ CESKalman_Bootstrap <- function(Estimation,grid.param_init=c(-9,-1,5),ndraw=1000
   if(sigma==0&nlags>1){gamma2=Estimation$Smooth$s[1,9]}
   if(sigma>0&nlags>1){gamma2=Estimation$Smooth$s[1,10]}
 
-  if(sigma==0){Leontief=TRUE}else{Leontief=FALSE}
+  # if(sigma==0){Leontief=TRUE}else{Leontief=FALSE}
 
   ########################### Ordering data #######################
 
@@ -135,12 +135,12 @@ CESKalman_Bootstrap <- function(Estimation,grid.param_init=c(-9,-1,5),ndraw=1000
 
    Y_boot = diff(S_boot[(1+nlags):length(S_boot)])   # Correct the length of Y if more lags are included
 
-
-    if(Leontief==FALSE){
+# 
+#     if(Leontief==FALSE){
         X_boot <- cbind(S_boot[(1+nlags):(length(S)-1)],P[(1+nlags):(length(S)-1)],diff(P[(1+nlags):length(P)]))
-        }else{
-          X_boot <- cbind(S_boot[(1+nlags):(length(S)-1)]-P[(1+nlags):(length(S)-1)],diff(P[(1+nlags):length(P)]))
-        }
+        # }else{
+          # X_boot <- cbind(S_boot[(1+nlags):(length(S)-1)]-P[(1+nlags):(length(S)-1)],diff(P[(1+nlags):length(P)]))
+        # }
 
       if(nlags==1){
         X_boot <- cbind(X_boot,diff(P[1:(length(P)-1)]),diff(S_boot[1:(length(S)-1)]))
@@ -152,7 +152,7 @@ CESKalman_Bootstrap <- function(Estimation,grid.param_init=c(-9,-1,5),ndraw=1000
       }
 
 
-    tmp = CESKalman_Estimation(Y=Y_boot,X=X_boot,grid.param_init=grid.param_init,nlags=nlags,lambda=Estimation$est.lambda,Leontief=Leontief,alpha_init=Estimation$alpha,sigma_init=Estimation$sigma,
+    tmp = CESKalman_Estimation(Y=Y_boot,X=X_boot,grid.param_init=grid.param_init,nlags=nlags,lambda=Estimation$est.lambda,Leontief=FALSE,alpha_init=Estimation$alpha,sigma_init=Estimation$sigma,
                                 cVal_NIS=cVal_NIS)
 if(tmp$BG_test>cVal_Auto&tmp$NIS_test[1]>tmp$NIS_test[2]&tmp$NIS_test[1]<tmp$NIS_test[3]){
       boot_alpha[k] = tmp$alpha
