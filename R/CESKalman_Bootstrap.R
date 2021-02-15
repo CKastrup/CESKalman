@@ -71,7 +71,6 @@ CESKalman_Bootstrap <- function(Estimation,grid.param_init=c(-9,-1,5),ndraw=1000
   boot_sigma  = matrix(NA,ncol=1,nrow=ndraw)
   boot_likelihood = matrix(NA,ncol=1,nrow=ndraw)
 
-
   nlags = Estimation$nlags
 
   res      = Estimation$residuals
@@ -153,7 +152,7 @@ CESKalman_Bootstrap <- function(Estimation,grid.param_init=c(-9,-1,5),ndraw=1000
       }
 
 
-    tmp = CESKalman_Estimation(Y=Y_boot,X=X_boot,grid.param_init=grid.param_init,nlags=nlags,lambda=Estimation$est.lambda,Leontief=FALSE,alpha_init=Estimation$alpha,sigma_init=Estimation$sigma,
+    tmp = CESKalman_Estimation(Y=Y_boot,X=X_boot,grid.param_init=grid.param_init,nlags=nlags,lambda=Estimation$est.lambda,Leontief=Leontief,alpha_init=Estimation$alpha,sigma_init=Estimation$sigma,
                                 cVal_NIS=cVal_NIS)
 if(tmp$BG_test>cVal_Auto&tmp$NIS_test[1]>tmp$NIS_test[2]&tmp$NIS_test[1]<tmp$NIS_test[3]){
       boot_alpha[k] = tmp$alpha
