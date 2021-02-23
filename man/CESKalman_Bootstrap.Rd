@@ -4,7 +4,8 @@
 \alias{CESKalman_Bootstrap}
 \title{Function for bootstrapping confidence intervals of the elasticity and adjustment parameter}
 \usage{
-CESKalman_Bootstrap(Estimation,grid.param_init=c(-9,-1,3),ndraw=1000,print_results=TRUE,cVal_Auto=0.1,cVal_NIS=0.1)
+CESKalman_Bootstrap(Estimation,grid.param_init=c(-9,-1,3),ndraw=1000,print_results=TRUE,
+                           cVal_Auto=0.1,cVal_NIS=0.1)
 }
 \arguments{
 \item{Estimation}{An object of class CESKalman}
@@ -42,9 +43,7 @@ Only draws with no autocorrelation in the estimated model and the NIS test withi
 ## First, data is loaded with the Load_Data function (or any other data set)
 data = Load_Data(Country="USA",tstart=1970,tend=2017)
 
-data = data.frame(data)
-
-data = cbind(data$q,data$w,data$K,data$L)
+data = cbind(data[,"q"],data[,"w"],data[,"K"],data[,"L"])
 
 ## Next, the CESKalman function is called
 Kalman = CESKalman(data=data,grid.lambda=c(10,500,20), lambda_est_freely=TRUE)
@@ -54,7 +53,7 @@ Bootstrap = CESKalman_Bootstrap(Estimation=Kalman)
 
 }
 \references{
-Kronborg et al (2019) and Petris et al (2010)
+Kronborg et al (2019) and Petris et al (2010) and Kastrup et al (2021)
 }
 \author{
 Christian Sandholm Kastrup <CST@dreamgruppen.dk>, Anders Farver Kronborg <ANK@dreamgruppen.dk> and Peter Philip Stephensen <PSP@dreamgruppen.dk>

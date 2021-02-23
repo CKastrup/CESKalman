@@ -87,7 +87,7 @@
 #' Gamma=Kalman$Gamma # This is the relative log augmenting technologies
 #'
 #'
-#' @references Kronborg et al (2019) @Kronborg2019
+#' @references Kronborg et al (2019) and Kastrup et al (2021)
 #'
 #' @export
 

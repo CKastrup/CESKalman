@@ -44,7 +44,7 @@ plot(Kalman)
 
 }
 \references{
-Kronborg et al (2019)
+Kronborg et al (2019) and Kastrup et al (2021)
 }
 \author{
 Christian Sandholm Kastrup <CST@dreamgruppen.dk>, Anders Farver Kronborg <ANK@dreamgruppen.dk> and Peter Philip Stephensen <PSP@dreamgruppen.dk>
