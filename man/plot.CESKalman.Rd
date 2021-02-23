@@ -14,30 +14,34 @@ plot.CESKalman(Kalman,t0=1,tEnd=nrow(Kalman$data))
 \item{tEnd}{End date. Only available for yearly data, else it is an index}
 }
 \description{
-The first plot contains the model fit of the relative quantities. The second is a decomposition of the fitted values in a price and a trend component.
+The first plot contains the model fit of the relative quantities. The second is the process of relative augmenting technical change.
 The third plot is the demeaned-data series applied in estimation.
 }
 \details{
 \strong{NOTE:}
-As we are primarily interested to explain the model fit of the relative quantities, the estimated equation is first translated into quantities, denoted \eqn{x_t}:
-\eqn{\Delta x_{t}=\alpha(x_{t-1}+\sigma p_{t-1}-\mu_{t-1})+(\kappa_{i}-1)\Delta p_{t}+\epsilon_t}. Note that nlags=0 is currently only available option.
+As we are primarily interested to explain the model fit of the relative quantities (e.g. capital relative to labor), the estimated equation is first translated into quantities, denoted \eqn{x_t}:
+\eqn{\Delta x_{t}=\alpha(x_{t-1}+\sigma p_{t-1}-\mu_{t-1})+(\kappa_{i}-1)\Delta p_{t}+\epsilon_t}. \eqn{x_t} is the relative quantities, 
+\eqn{p_t} the relative prices (e.g. the user cost relative to the wage) and \eqn{\mu_{t} \equiv (\sigma-1)log(\Gamma_t)} with \eqn{\Gamma_t} 
+being the process of relative augmenting technical change (e.g. capital augmenting techncial change relative to labor augmenting technical change).
 
-This constitutes a differential equation. The fitted values can be decomposed into two terms, \eqn{\hat{x}_t=\hat{x}_t^{Trend}+\hat{x}_t^{Price}}.
-The trend component is \eqn{\hat{x}_t^{Trend}\equiv \hat{x}_0(1+\hat{\alpha})^t-\hat{\alpha}\sum_{s=1}^{t}\hat{\mu}_{s-1} *(1+\hat{\alpha})^{t-s}}.
-The price component is \eqn{\hat{x}_t^{Price}\equiv \sum_{s=1}^t(\hat{\alpha}\hat{\sigma}p_{s-1}+(\hat{\kappa}-1)\Delta p_s)(1+\hat{\alpha})^{t-s}}
-For now, the function can only handle yearly data, if you want to specify the start and end date. If using data
-at another frequency, you will have to use the default t0 and tEnd. In addition, the function is only suitable when nlags=0.
+The first graph shows the values of \eqn{x_{t}}, the fitted values,\eqn{\hat{x_{t}}=x_{t}-\epsilon_t} and the residuals \eqn{\epsilon_t}. It is used to
+evaluate the fit of the model. 
+
+The second graph shows the process of relative augmenting technical change, i.e. \eqn{log(\Gamma_t)} and shows the direction of technical change. Of particular interest
+is if the direction has changed throught the sample and features so-called "medium run" fluctuations.   
+
+The last graph shows the data series of \eqn{x_t-\bar{x}} and \eqn{-(p_t-\bar{p})} with \eqn{\bar{x}} and \eqn{\bar{p}} denoting the mean over time. 
+Note that the relative price is plotted on the right axis and with a negative sign in front. If the two resulting series are possitively correlated, it implies
+that the long run elasticity is expected to be positive.
 }
 \examples{
 ## First, data is loaded with the Load_Data function (or any other data set)
 data = Load_Data(Country="USA",tstart=1970,tend=2017)
 
-data = data.frame(data)
-
-data = cbind(data$q,data$w,data$K,data$L)
+data = cbind(data[,"q"],data[,"w"],data[,"K"],data[,"L"])
 
 ## The second step is a call to the CESKalman function
-Kalman = CESKalman(data,grid.lambda=c(10,1000,20),lambda_est_freely = F,max_nlags=0)
+Kalman = CESKalman(data,grid.lambda=c(10,500,20),lambda_est_freely = T)
 
 ## Lastly we can plot the fit of the model:
 plot(Kalman)
