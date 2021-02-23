@@ -245,7 +245,6 @@ for(Leontief in c(FALSE,TRUE)){   ## If the elasticity is found to be negative, 
   ## Print some results
   if(print_results==TRUE){
   cat("     lambda=",round(tmp$est.lambda,2),"  Likelihood=",round(tmp$LV,2),"  sigma=",round(tmp$sigma,2),"  NIS=",(tmp$NIS_test[1]>tmp$NIS_test[2]&tmp$NIS_test[1]<tmp$NIS_test[3]),"  BG_test=",(tmp$BG_test>cVal_Auto),"\n")
-  cat("\n")
   }
 
 
