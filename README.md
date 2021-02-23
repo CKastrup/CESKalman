@@ -1,13 +1,12 @@
 # The CESKalman package
-Welcome to the Github page of the R-package CESKalman.The package is used to estimate CES production functions in time series data. 
+Welcome to the Github page of the R-package CESKalman. The package is used to estimate CES production functions in time series data. 
 
-The main advantage of this package relative to other approches in the literature (linear trend assumption, Box-Cox transformation ect.) is that the process of technical change, known to potentially bias the elasticity estimate, is estimated in a flexible manner as an I(2) process. The inverse signal-to-noise ratio (the ratio of measurement error to signal error in the Kalman filter), determines the smoothness of the process: High values implies that technical change converges to a linear trend. Oppositely, low values implies that all year-to-year noise in the data not explained by the relative prices are subscribed to technical change. The optimal value is found as the value that maximizes the likelihood based on first a free estimation and next a grid search procedure to address potential non-concavity of the objective function.
+The main advantage of this package relative to other approches in the literature (linear trend assumption, Box-Cox transformation ect.) is that the process of technical change, known to potentially bias the elasticity estimate, is estimated in a flexible manner as an I(2) process. The inverse signal-to-noise ratio (the ratio of measurement error variance to variance of the process of technical change), determines the smoothness of the process: High values imply that technical change converges to a linear trend. Oppositely, low values imply that all year-to-year noise in the data not explained by the relative prices are subscribed to technical change. The optimal value is found as the value that maximizes the likelihood based on first a free estimation and next a grid search procedure to address potential non-concavity of the objective function.
 
-The reader is referred to the Reference_manual and the Vignette made available to the user from this Github page along with the working paper version on https://dreamgruppen.dk/media/9274/w2019_06.pdf for information on the methodology and how to apply the package. We are happy to take comments, questions, or recommendations on mail CST@dreammodel.dk. 
+For information on the methodology and how to apply the package, the reader is referred to the [Reference_manual](https://github.com/CKastrup/CESKalman/blob/master/Reference_manual.pdf) and the [Vignette](https://github.com/CKastrup/CESKalman/blob/master/VIGNETTE.pdf) made available to the user from this Github page along with the [working paper version](https://dreamgruppen.dk/media/9274/w2019_06.pdf). We are happy to take comments, questions, or recommendations on mail CST@dreammodel.dk. 
 
 We hope that the package can be an improvement to future researchers estimating the elasticity of substitution.
 
-Best,
 Christian S. Kastrup (mail: CST@dreammodel.dk), Anders F. Kronborg (mail: ANK@dreammodel.dk) and Peter P. Stephensen (mail: PSP@dreammodel.dk)
 
 # Usage
