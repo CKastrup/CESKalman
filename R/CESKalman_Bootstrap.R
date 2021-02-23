@@ -27,7 +27,8 @@
 #' @param cVal_auto Critical value for the Breusch-Godfrey test for autocorrelation
 #' @param cVal_NIS Critical value for the NIS test 
 #' 
-#' @usage CESKalman_Bootstrap(Estimation,grid.param_init=c(-9,-1,3),ndraw=1000,print_results=TRUE,cVal_Auto=0.1,cVal_NIS=0.1)
+#' @usage CESKalman_Bootstrap(Estimation,grid.param_init=c(-9,-1,3),ndraw=1000,print_results=TRUE,
+#'                            cVal_Auto=0.1,cVal_NIS=0.1)
 #
 #'
 #'
@@ -39,9 +40,7 @@
 #' ## First, data is loaded with the Load_Data function (or any other data set)
 #' data = Load_Data(Country="USA",tstart=1970,tend=2017)
 #'
-#' data = data.frame(data)
-#'
-#' data = cbind(data$q,data$w,data$K,data$L)
+#' data = cbind(data[,"q"],data[,"w"],data[,"K"],data[,"L"])
 #'
 #' ## Next, the CESKalman function is called
 #' Kalman = CESKalman(data=data,grid.lambda=c(10,500,20), lambda_est_freely=TRUE)
@@ -49,7 +48,7 @@
 #' ## Bootstrapping confidence intervals
 #' Bootstrap = CESKalman_Bootstrap(Estimation=Kalman)
 #'
-#' @references Kronborg et al (2019) and Petris et al (2010)
+#' @references Kronborg et al (2019) and Petris et al (2010) and Kastrup et al (2021)
 #'
 #' @export
 
@@ -167,11 +166,9 @@ if(tmp$BG_test>cVal_Auto&tmp$NIS_test[1]>tmp$NIS_test[2]&tmp$NIS_test[1]<tmp$NIS
     nacc_ratio= k/nacc
 
 if(print_results){
-    if(k %% 10 == 0){
       cat("\014")
       cat(paste("This is draw number ",k,sep=""), "\n")
       cat(paste("Acceptance ratio ",round(nacc_ratio,digits=2)), "\n")
-    }
 }
   }
 if(print_results){

@@ -63,9 +63,7 @@
 #' ## First, data is loaded with the Load_Data function (or any other data set)
 #' data = Load_Data(Country="USA",tstart=1970,tend=2017)
 #'
-#' data = data.frame(data)
-#'
-#' data = cbind(data$q,data$w,data$K,data$L)
+#' data = cbind(data[,"q"],data[,"w"],data[,"K"],data[,"L"])
 #'
 #' ## We can then estimate with four different approaches that all depends on the value of lambda.
 #'
@@ -89,7 +87,7 @@
 #' Gamma=Kalman$Gamma # This is the relative log augmenting technologies
 #'
 #'
-#' @references Kronborg et al (2019)
+#' @references Kronborg et al (2019) and Kastrup et al (2021)
 #'
 #' @export
 

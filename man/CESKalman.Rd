@@ -66,9 +66,7 @@ exp(param[1]), i.e. the observation variance. But for any observation variance w
 ## First, data is loaded with the Load_Data function (or any other data set)
 data = Load_Data(Country="USA",tstart=1970,tend=2017)
 
-data = data.frame(data)
-
-data = cbind(data$q,data$w,data$K,data$L)
+data = cbind(data[,"q"],data[,"w"],data[,"K"],data[,"L"])
 
 ## We can then estimate with four different approaches that all depends on the value of lambda.
 
@@ -94,7 +92,7 @@ Gamma=Kalman$Gamma # This is the relative log augmenting technologies
 
 }
 \references{
-Kronborg et al (2019)
+Kronborg et al (2019) and Kastrup et al (2021)
 }
 \author{
 Christian Sandholm Kastrup <CST@dreamgruppen.dk> , Anders Farver Kronborg <ANK@dreamgruppen.dk> and Peter Philip Stephensen <psp@dreamgruppen.dk>
