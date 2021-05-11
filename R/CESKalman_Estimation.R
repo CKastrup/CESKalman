@@ -226,7 +226,7 @@ if(!between(alpha_init,-1,0)){
 
   ############### Diagnostics ########################
 
-  JB_test    = jb.norm.test(res)$p.value
+  JB_test    = jb.norm.test(res[!is.na(res)])$p.value
 
   trend = 1:length(Smooth_Struc)
 
