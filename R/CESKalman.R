@@ -101,7 +101,7 @@
 # ===================================================================
 
 CESKalman <- function(data,grid.param_init=c(-9,-1,5),max_nlags=2,grid.lambda,grid.alpha_init=c(-0.9,-0.1,0.3),grid.sigma_init=c(0,1.5,0.5),
-                                 cVal_NIS=0.10,cVal_Auto=0.10,print_results=TRUE,lambda_est_freely=TRUE){
+                                 cVal_NIS=0.10,cVal_Auto=0.10,print_results=TRUE,lambda_est_freely=TRUE,Y_forecast=NA){
 
 
   ## Outline:
@@ -185,8 +185,11 @@ for(Leontief in c(FALSE,TRUE)){   ## If the elasticity is found to be negative, 
                  diff(P[1:(length(P)-nlags)]),diff(S[1:(length(S)-nlags)]))
     }
 
+    if(is.na(Y_forecast)){
       Y = diff(S[(1+nlags):length(S)])   # Correct the length of Y if more lags are included
-
+    }else{
+  Y = Y_forecast[(1+nlags):length(S)] ## Correct for the number of lags
+}
     for(alpha_init in set.alpha_init){   ## Loop over all values in the grid of alpha
       for(sigma_init in set.sigma_init){ ## Loop over all values in the grid of sigma. Choose the one that maximizes the likelihood
 
