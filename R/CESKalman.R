@@ -188,7 +188,7 @@ for(Leontief in c(FALSE,TRUE)){   ## If the elasticity is found to be negative, 
     if(is.na(Y_forecast)){
       Y = diff(S[(1+nlags):length(S)])   # Correct the length of Y if more lags are included
     }else{
-  Y = Y_forecast[(1+nlags):length(S)] ## Correct for the number of lags
+  Y = Y_forecast[(1+nlags):length(Y_forecast)] ## Correct for the number of lags
 }
     for(alpha_init in set.alpha_init){   ## Loop over all values in the grid of alpha
       for(sigma_init in set.sigma_init){ ## Loop over all values in the grid of sigma. Choose the one that maximizes the likelihood
