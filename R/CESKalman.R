@@ -101,7 +101,7 @@
 # ===================================================================
 
 CESKalman <- function(data,grid.param_init=c(-9,-1,5),max_nlags=2,grid.lambda,grid.alpha_init=c(-0.9,-0.1,0.3),grid.sigma_init=c(0,1.5,0.5),
-                                 cVal_NIS=0.10,cVal_Auto=0.10,print_results=TRUE,lambda_est_freely=TRUE,Y_forecast=NA){
+                                 cVal_NIS=0.10,cVal_Auto=0.10,print_results=TRUE,lambda_est_freely=TRUE,Y_forecast=NA,lim_sigma=c(-Inf,Inf)){
 
 
   ## Outline:
@@ -271,7 +271,7 @@ if(lambda_est_freely){
     tmp_pref = tmp
   }else{
     if(all(tmp_pref$NIS_test[1]<tmp_pref$NIS_test[3] & tmp_pref$NIS_test[1]>tmp_pref$NIS_test[2] & tmp_pref$BG_test>cVal_Auto)==TRUE){  ## Preffered is within the NIS confidence bands and the BG test for autocorrelation
-      if(all(tmp$NIS_test[1]<tmp$NIS_test[3] & tmp$NIS_test[1]>tmp$NIS_test[2] & tmp$BG_test>cVal_Auto &tmp$LV>tmp_pref$LV)==TRUE){  ## Last try is within the confidence bands and likelihood is higher
+      if(all(tmp$NIS_test[1]<tmp$NIS_test[3] & tmp$NIS_test[1]>tmp$NIS_test[2] & tmp$BG_test>cVal_Auto &tmp$LV>tmp_pref$LV&tmp$sigma>lim_sigma[1]&tmp$sigma<lim_sigma[2])==TRUE){  ## Last try is within the confidence bands and likelihood is higher
         tmp_pref = tmp  ## Then replace!
 
       }
