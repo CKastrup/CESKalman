@@ -272,13 +272,18 @@ if(lambda_est_freely){
   }else{
     if(all(tmp_pref$NIS_test[1]<tmp_pref$NIS_test[3] & tmp_pref$NIS_test[1]>tmp_pref$NIS_test[2] & tmp_pref$BG_test>cVal_Auto)==TRUE){  ## Preffered is within the NIS confidence bands and the BG test for autocorrelation
       if(all(tmp$NIS_test[1]<tmp$NIS_test[3] & tmp$NIS_test[1]>tmp$NIS_test[2] & tmp$BG_test>cVal_Auto &tmp$LV>tmp_pref$LV&tmp$sigma>lim_sigma[1]&tmp$sigma<lim_sigma[2])==TRUE){  ## Last try is within the confidence bands and likelihood is higher
-        tmp_pref = tmp  ## Then replace!
-
+     
+        if(tmp$sigma>lim_sigma[1]&tmp$sigma<lim_sigma[2]){
+           tmp_pref = tmp  ## Then replace!
+        }
+        
       }
     }else{   ## If preferred is misspecified
    #   if(all(tmp$NIS_test[1]<tmp$NIS_test[3] & tmp$NIS_test[1]>tmp$NIS_test[2] & tmp$BG_test>cVal_Auto)==TRUE){
       if(tmp$LV>tmp_pref$LV){    # Replace if the likelihood is higher
+        if(tmp$sigma>lim_sigma[1]&tmp$sigma<lim_sigma[2]){
         tmp_pref = tmp
+        }
       }
     }
 
